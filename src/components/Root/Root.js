@@ -24,6 +24,9 @@ const theme = createMuiTheme({
       contrastText: '#000',
     },
   },
+  typography: {
+    useNextVariants: true
+  }
 });
 
 const Root = ({ children }) => (

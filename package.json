@@ -28,6 +28,6 @@
     "@bigtest/react": "^0.1.2",
     "chai": "^4.2.0",
     "mocha": ">= 4.0.0",
-    "parcel-bundler": "^1.6.2"
+    "parcel": "latest"
   }
 }

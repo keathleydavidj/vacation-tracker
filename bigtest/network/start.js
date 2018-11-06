@@ -1,7 +1,7 @@
 import Mirage, { camelize } from '@bigtest/mirage';
 
 import baseConfig from './config';
-import './force-fetch-polyfill';
+// import './force-fetch-polyfill';
 
 import * as scenarios from './scenarios';
 import * as factories from './factories';
@@ -11,7 +11,7 @@ import * as models from './models';
 
 const environment = process.env.NODE_ENV;
 
-export default function startMirage(...scenarioNames) {
+export default function startMirage(scenarioNames = []) {
   let server = new Mirage({
     // Uncomment these imports if you add files
     //
