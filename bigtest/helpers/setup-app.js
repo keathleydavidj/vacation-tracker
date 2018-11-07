@@ -1,23 +1,33 @@
 import { setupAppForTesting } from '@bigtest/react';
+import { beforeEach, describe } from '@bigtest/mocha';
 import startMirage from '../network/start';
 
-// Import your applications root.
-// This is typically what you pass to `ReactDOM.render`
-import App from '../../src/app.js';
+import TestHarness from './harness';
 
-export async function setupApplicationForTesting() {
-  let server, app;
+export function describeApp(name, setup, describeFn = describe) {
+  describeFn(name, function() {
+    beforeEach(async function() {
+      this.app = await setupAppForTesting(TestHarness, {
+        mountId: 'bigtesting-container',
+        setup: () => {
+          this.server = startMirage();
+          this.server.logging = false;
+        },
+        teardown: () => {
+          this.server.shutdown();
+        }
+      });
 
-  app = await setupAppForTesting(App, {
-    mountId: 'bigtesting-container',
-    setup: () => {
-      server = startMirage();
-      server.logging = false;
-    },
-    teardown: () => {
-      server.shutdown();
-    }
+      document.getElementById('bigtesting-container').style.height = '100%';
+      this.visit = this.app.history.navigate
+    });
+
+    let doSetup = typeof setup.suite === 'function' ? setup.suite : setup;
+    doSetup.call(this);
   });
-
-  return { app, server };
 }
+
+describeApp.skip = describe.skip;
+describeApp.only = function(name, setup) {
+  return describeApp(name, setup, describe.only);
+};

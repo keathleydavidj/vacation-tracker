@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Typography } from '@material-ui/core';
 
 const CalendarRoute = () => (
-  <Fragment>
+  <div id="calendar-route">
     <Typography variant="h6" color="inherit" noWrap>
       Calendar
     </Typography>
-  </Fragment>
+  </div>
 );
 
 export default CalendarRoute;

@@ -1,3 +1,5 @@
 import '@babel/polyfill';
 
-import './tests/app-test';
+import './tests/calendar-test';
+import './tests/detail-test';
+import './tests/index-test';

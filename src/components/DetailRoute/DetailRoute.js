@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Typography, TextField } from '@material-ui/core';
 
 const DetailRoute = ({ requestId }) => (
-  <Fragment>
+  <div id="detail-route">
     <Typography variant="h6" color="inherit" noWrap>
       Editing Request ID: {`${requestId}`}
     </Typography>
@@ -28,7 +28,7 @@ const DetailRoute = ({ requestId }) => (
         margin="normal"
       />
     </form>
-  </Fragment>
+  </div>
 );
 
 export default DetailRoute;

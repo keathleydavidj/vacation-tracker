@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Typography } from '@material-ui/core';
 
 const API = 'https://api.frontside.io/v1/requests';
@@ -21,7 +21,7 @@ class IndexRoute extends Component {
   render() {
     const { requests } = this.state;
     return (
-      <Fragment>
+      <div id="index-route">
         <Typography variant="h6" color="inherit" noWrap>
           Requests
         </Typography>
@@ -29,7 +29,7 @@ class IndexRoute extends Component {
         <Typography variant="subtitle2" color="secondary" noWrap>
           {`requests.length = ${requests.length}`}  
         </Typography>
-      </Fragment>
+      </div>
     );
   }
 };
