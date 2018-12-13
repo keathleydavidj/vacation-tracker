@@ -3,30 +3,32 @@ import {
   interactor,
   isPresent,
   scoped,
-  text
+  text,
+  clickable
 } from '@bigtest/interactor';
 
-const testId = str => `[data-test-id="${str}"]`;
-
 @interactor class IndexPage {
-  hasHeading = isPresent(testId('index-header'));
-  headingText = text(testId('index-header'));
+  hasHeading = isPresent('[data-test-index-header]');
+  headingText = text('[data-test-index-header]');
 
-  requestList = collection(testId('request-list-item'), {
-    ownerName: text(testId('owner-name')),
-    status: scoped(testId('status'), {
-      label: text('label'),
-      text: text(testId('value'))
+  requestList = collection('[data-test-request-list-item]', {
+    ownerName: text('[data-test-owner-name]'),
+    status: scoped('[data-test-status]', {
+      label: text('[data-test-label]'),
+      text: text('[data-test-value]')
     }),
-    startDate: scoped(testId('start-date'), {
-      label: text('label'),
-      text: text(testId('value'))
+    startDate: scoped('[data-test-start-date]', {
+      label: text('[data-test-label]'),
+      text: text('[data-test-value]')
     }),
-    endDate: scoped(testId('end-date'), {
-      label: text('label'),
-      text: text(testId('value'))
-    })
+    endDate: scoped('[data-test-end-date]', {
+      label: text('[data-test-label]'),
+      text: text('[data-test-value]')
+    }),
+
+    clickEdit: clickable('[data-test-edit-icon]'),
+    clickDelete: clickable('[data-test-delete-icon]')
   });
 }
 
-export default new IndexPage(testId('index-route'));
+export default new IndexPage('[data-test-index-route]');

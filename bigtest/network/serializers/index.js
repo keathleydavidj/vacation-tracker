@@ -3,3 +3,5 @@
 
 // For example:
 // export { default as post } from './post';
+
+export { default as request } from './request';

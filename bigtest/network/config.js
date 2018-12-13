@@ -1,13 +1,17 @@
 export default function configure() {
-  const API = 'https://api.frontside.io/v1';
+  this.urlPrefix = 'https://api.frontside.io/v1';
 
-  this.post(`${API}/requests`, 'requests');
+  this.post('/requests');
 
-  this.get(`${API}/requests`, 'requests');
+  this.get('/requests');
 
-  this.get(`${API}/requests/:id`, 'request');
+  this.get('/requests/:id');
 
-  this.put(`${API}/requests/:id`, 'request');
+  this.put('/requests/:id', ({ requests }, netReq) => {
+    let payload = JSON.parse(netReq.requestBody);
+    let record = requests.find(netReq.params.id); 
+    return record.update(payload);
+  });
 
-  this.del(`${API}/request/:id`, 'request');
+  this.del('/requests/:id');
 }

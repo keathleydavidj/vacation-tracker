@@ -5,6 +5,8 @@ import RequestList from '../RequestList';
 const API = 'https://api.frontside.io/v1/requests';
 
 class IndexRoute extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
 
@@ -14,23 +16,30 @@ class IndexRoute extends Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
+
     fetch(API)
       .then(response => response.json())
-      .then(data => this.setState({ requests: data.requests }));
+      .then(data => {
+        if (this._isMounted) {
+          this.setState({ requests: data.requests });
+        }  
+      });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   render() {
     let { requests } = this.state;
     return (
-      <div data-test-id="index-route">
-        <h6 data-test-id="index-header">
+      <div data-test-index-route>
+        <h6 data-test-index-header>
           Requests
         </h6>
         <br />
         <RequestList requests={requests} />
-        {/* <Typography variant="h4" color="textSecondary" noWrap>
-          Requests Length: {requests.length}
-        </Typography> */}
       </div>
     );
   }

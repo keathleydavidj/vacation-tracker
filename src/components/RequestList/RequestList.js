@@ -5,7 +5,7 @@ import RequestListItem from '../RequestListItem';
 
 const RequestList = ({ requests }) => {
   return (
-    <div className="requestList" data-test-id="request-list">
+    <div className="requestList" data-test-request-list>
       {requests.map(req => (
         <RequestListItem
           request={req}
