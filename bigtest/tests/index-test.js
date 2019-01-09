@@ -12,11 +12,11 @@ describeApp('Index Route', () => {
   });
   
   describe('list of requests', () => {
-    it('displays the list', () => {
+    it('displays each item', () => {
       expect(IndexPage.requestList().length).to.equal(4);
     });
 
-    describe('each request', () => {
+    describe('for each request', () => {
       it('displays requestee field', () => {
         expect(IndexPage.requestList(0).ownerName).to.equal('Larry');
       });
@@ -35,15 +35,15 @@ describeApp('Index Route', () => {
         expect(IndexPage.requestList(0).endDate.label).to.equal('End date');
         expect(IndexPage.requestList(0).endDate.text).to.equal('12-31-2019');
       });
-    });
 
-    describe('Selecting a request for editing', () => {
-      beforeEach(() => {
-        return IndexPage.requestList(0).clickEdit();
-      });
+      describe('selecting for edit', () => {
+        beforeEach(() => {
+          return IndexPage.requestList(0).clickEdit();
+        });
 
-      it('navigates to the record editing page', () => {
-        expect(DetailPage.isPresent).to.be.true;
+        it('navigates to the record editing page', () => {
+          expect(DetailPage.isPresent).to.be.true;
+        });
       });
     });
   });

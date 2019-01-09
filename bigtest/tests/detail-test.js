@@ -33,32 +33,56 @@ describeApp('Detail Route', () => {
     expect(DetailPage.nameIsReadOnly).to.be.true;
   });
 
-  describe('editing input fields', () => {
-    describe('status field', () => {
+  describe('editing', () => {
+    describe('the status field', () => {
       beforeEach(() => {
         return DetailPage.changeStatus('Denied');
       });
 
-      it('updates the field', () => {
+      it('updates the status', () => {
         expect(DetailPage.status).to.equal('Denied');
       });
     });
-    describe('start date field', () => {
+
+    describe('the start date field', () => {
       beforeEach(() => {
         return DetailPage.changeStartDate('06-07-2019');
       });
 
-      it('updates the field', () => {
+      it('updates the start date', () => {
         expect(DetailPage.startDate).to.equal('06-07-2019');
       });
     });
-    describe('end date field', () => {
+
+    describe('the end date field', () => {
       beforeEach(() => {
         return DetailPage.changeEndDate('06-09-2019');
       });
 
-      it('updates the field', () => {
+      it('updates the end date', () => {
         expect(DetailPage.endDate).to.equal('06-09-2019');
+      });
+    });
+
+    describe('then canceling edits', () => {
+      beforeEach(() => {
+        return DetailPage.clickCancel();
+      });
+
+      it('navigates to the list view page', () => {
+        expect(IndexPage.isPresent).to.be.true;
+      });
+
+      describe('confirms', () => {
+        beforeEach(function() {
+          this.visit(`/requests/${request.id}`);
+        });
+
+        it('original values have been restored to each field', () => {
+          expect(DetailPage.status).to.equal('Pending');
+          expect(DetailPage.startDate).to.equal('01-01-2019');
+          expect(DetailPage.endDate).to.equal('02-01-2019');
+        });
       });
     });
   });
@@ -82,28 +106,6 @@ describeApp('Detail Route', () => {
       expect(payload.status).to.equal('Approved');
       expect(payload.startDate).to.equal('11-20-2019');
       expect(payload.endDate).to.equal('12-05-2019');
-    });
-
-    describe('Canceling edits', () => {
-      beforeEach(() => {
-        return DetailPage.clickCancel();
-      });
-
-      it('navigates to the list view page', () => {
-        expect(IndexPage.isPresent).to.be.true;
-      });
-
-      describe('confirming edits were removed after cancelation', () => {
-        beforeEach(function() {
-          this.visit(`/requests/${request.id}`);
-        });
-
-        it('reset the fields back to their original value', () => {
-          expect(DetailPage.status).to.equal('Pending');
-          expect(DetailPage.startDate).to.equal('01-01-2019');
-          expect(DetailPage.endDate).to.equal('02-01-2019');
-        });
-      });
     });
   });
 });
