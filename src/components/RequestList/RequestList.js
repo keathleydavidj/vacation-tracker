@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 
 import RequestListItem from '../RequestListItem';
 
-const RequestList = ({ requests }) => {
+const RequestList = ({ removeRequestById, requests }) => {
   return (
     <div className="requestList" data-test-request-list>
       {requests.map(req => (
         <RequestListItem
           request={req}
+          removeRequestById={removeRequestById}
           key={req.id}
         />
       ))}
@@ -17,6 +18,7 @@ const RequestList = ({ requests }) => {
 };
 
 RequestList.propTypes = {
+  removeRequestById: PropTypes.func,
   requests: PropTypes.arrayOf(PropTypes.object)
 };
 

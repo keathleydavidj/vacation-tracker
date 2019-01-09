@@ -45,6 +45,27 @@ describeApp('Index Route', () => {
           expect(DetailPage.isPresent).to.be.true;
         });
       });
+
+      describe('clicking delete icon', () => {
+        let called = false;
+
+        beforeEach(function() {
+          this.server.delete('/requests/:id', (db, netReq) => {  // eslint-disable-line no-unused-vars
+            called = true;
+            return {};
+          });
+
+          return IndexPage.requestList(0).clickDelete();
+        });
+
+        it('removes that record from the list', () => {
+          expect(IndexPage.requestList(0).ownerName).to.not.equal('Larry');
+        });
+
+        it('sends off the api request successfully', () => {
+          expect(called).to.be.true;
+        });
+      });
     });
   });
 });
