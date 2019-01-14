@@ -38,7 +38,7 @@ const RequestListItem = ({ removeRequestById, request }) => {
         </Link>
       </div>
       <div className="level-item has-text-centered">
-        <button onClick={() => removeRequestById(request.id)} data-test-delete-icon>
+        <button className="button is-danger" onClick={() => removeRequestById(request.id)} data-test-delete-icon>
           <span className="icon" >
             <i className="fas fa-trash"></i>
           </span>

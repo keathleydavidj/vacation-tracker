@@ -45,7 +45,7 @@ describeApp('Create Detail Route', () => {
         });
 
         it('sends a POST request with the full payload', () => {
-          expect(payload.ownerName).to.equal('Amber');
+          expect(payload.owner).to.equal('Amber');
           expect(payload.startDate).to.equal('02-26-2019');
           expect(payload.endDate).to.equal('03-01-2019');
           expect(payload.status).to.equal('Pending');

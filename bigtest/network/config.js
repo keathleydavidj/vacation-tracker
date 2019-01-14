@@ -1,7 +1,11 @@
 export default function configure() {
   this.urlPrefix = 'https://api.frontside.io/v1';
 
-  this.post('/requests');
+  this.post('/requests', ({ requests }, netReq) => {
+    let payload = JSON.parse(netReq.requestBody);
+    let record = requests.create(payload);
+    return record;
+  });
 
   this.get('/requests');
 

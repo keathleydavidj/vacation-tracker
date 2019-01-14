@@ -4,6 +4,7 @@ import { describeApp } from '../helpers/setup-app';
 
 import DetailPage from '../interactors/detail-page';
 import IndexPage from '../interactors/index-page';
+import CreatePage from '../interactors/create-page';
 
 describeApp('Index Route', () => {
   it('has a heading', () => {
@@ -22,7 +23,7 @@ describeApp('Index Route', () => {
       });
 
       it('navigates to the create form', () => {
-        expect(DetailPage.isPresent).to.be.true;
+        expect(CreatePage.isPresent).to.be.true;
       });
     });
   });

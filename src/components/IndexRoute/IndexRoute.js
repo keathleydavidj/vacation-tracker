@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import RequestList from '../RequestList';
+import { Link } from '@reach/router';
 
 const API = 'https://api.frontside.io/v1/requests';
 
@@ -58,6 +59,12 @@ class IndexRoute extends Component {
           requests={requests}
           removeRequestById={this.removeRequestById}
         />
+        <br />
+        <Link to="/requests/new">
+          <button className="button is-dark" data-test-create-button>
+            Create new request
+          </button>
+        </Link>
       </div>
     );
   }
