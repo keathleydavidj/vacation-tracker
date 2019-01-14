@@ -10,6 +10,22 @@ describeApp('Index Route', () => {
     expect(IndexPage.hasHeading).to.equal(true);
     expect(IndexPage.headingText).to.equal('Requests');
   });
+
+  describe('create new request button', () => {
+    it('exists on the page', () => {
+      expect(IndexPage.isCreateButtonVisible).to.be.true;
+    });
+
+    describe('when clicked', () => {
+      beforeEach(() => {
+        return IndexPage.clickCreateButton();
+      });
+
+      it('navigates to the create form', () => {
+        expect(DetailPage.isPresent).to.be.true;
+      });
+    });
+  });
   
   describe('list of requests', () => {
     it('displays each item', () => {
