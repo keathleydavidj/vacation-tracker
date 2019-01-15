@@ -16,6 +16,7 @@
     "bulma": "^0.7.2",
     "moment": "^2.22.2",
     "react": "^16.2.0",
+    "react-day-picker": "^7.2.4",
     "react-dom": "^16.2.0"
   },
   "devDependencies": {

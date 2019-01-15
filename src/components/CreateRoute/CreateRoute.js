@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { Link, navigate } from '@reach/router';
 
+import moment from 'moment';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import { formatDate, parseDate } from 'react-day-picker/moment';
+import 'react-day-picker/lib/style.css';
+
 class CreateRoute extends Component {
   _isMounted = false;
 
@@ -40,23 +45,42 @@ class CreateRoute extends Component {
       .catch(error => console.error('Error: ', error)); // eslint-disable-line no-console
   }
 
+  get startDate() {
+    let { request: { startDate } } = this.state;
+    return moment(startDate, "MM-DD-YYYY").toDate();
+  }
+
+  get endDate() {
+    let { request: { endDate } } = this.state;
+    return moment(endDate, "MM-DD-YYYY").toDate();
+  }
+
+  // showFromMonth() {
+  //   let { request: { startDate, endDate } } = this.state;
+  //   if (!startDate) {
+  //     return;
+  //   }
+  //   if (moment(endDate).diff(moment(startDate), 'months') < 2) {
+  //     this.endDate.getDayPicker().showMonth(startDate);
+  //   }
+  // }
+
   changeOwnerName = (event) => {
     let inputValue = event.target.value;
     this.setState(prevState => ({ request: { ...prevState.request, owner: inputValue }}));
   }
 
-  changeEndDate = (event) => {
-    let inputValue = event.target.value;
-    this.setState(prevState => ({ request: { ...prevState.request, endDate: inputValue }}));
+  changeEndDate = (date) => {
+    this.setState(prevState => ({ request: { ...prevState.request, endDate: date }}));
   }
 
-  changeStartDate = (event) => {
-    let inputValue = event.target.value;
-    this.setState(prevState => ({ request: { ...prevState.request, startDate: inputValue }}));
+  changeStartDate = (date) => {
+    this.setState(prevState => ({ request: { ...prevState.request, startDate: date }}));
   }
 
   render() {
     let { request } = this.state;
+    let modifiers = { start: request.startDate, end: request.endDate };
     return (
       <div data-test-create-route>
         <h6>
@@ -82,7 +106,7 @@ class CreateRoute extends Component {
           <div className="field">
             <label className="label">Start Date</label>
             <div className="control">
-              <span className="icon is-small is-left">
+              {/* <span className="icon is-small is-left">
                 <i className="fas fa-calendar-alt"></i>
               </span>
               <input
@@ -91,6 +115,15 @@ class CreateRoute extends Component {
                 value={request.startDate}
                 onChange={this.changeStartDate}
                 data-test-start-date
+              /> */}
+              <DayPickerInput
+                value={request.startDate}
+                placeholder="Start date"
+                format="LL"
+                formatDate={formatDate}
+                parseDate={parseDate}
+                showOverlay
+                onDayChange={this.changeStartDate}
               />
             </div>
           </div>
@@ -98,15 +131,14 @@ class CreateRoute extends Component {
           <div className="field">
             <label className="label">End Date</label>
             <div className="control">
-              <span className="icon is-small is-left">
-                <i className="fas fa-calendar-alt"></i>
-              </span>
-              <input
-                className="input"
-                type="text"
+              <DayPickerInput
+                ref={el => (this.endDateElement = el)}
                 value={request.endDate}
-                onChange={this.changeEndDate}
-                data-test-end-date
+                placeholder="End date"
+                format="LL"
+                formatDate={formatDate}
+                parseDate={parseDate}
+                onDayChange={this.changeEndDate}
               />
             </div>
           </div>
