@@ -12,7 +12,7 @@ describeApp('Detail Route', () => {
       owner: 'David',
       status: 'Pending',
       startDate: '01-01-2019',
-      endDate: '02-01-2019'
+      endDate: '01-31-2019'
     });
     return this.visit(`/requests/${request.id}`);
   });
@@ -23,50 +23,50 @@ describeApp('Detail Route', () => {
   });
 
   it('has fields prepopulated with request values', () => {
-    expect(DetailPage.ownerName).to.equal('David');
-    expect(DetailPage.status).to.equal('Pending');
-    expect(DetailPage.startDate).to.equal('01-01-2019');
-    expect(DetailPage.endDate).to.equal('02-01-2019');
+    expect(DetailPage.form.ownerName).to.equal('David');
+    expect(DetailPage.form.status).to.equal('Pending');
+    expect(DetailPage.form.startDate.value).to.equal('01-01-2019');
+    expect(DetailPage.form.endDate.value).to.equal('01-31-2019');
   });
 
   it('has a readonly owner name field', () => {
-    expect(DetailPage.nameIsReadOnly).to.be.true;
+    expect(DetailPage.form.nameIsReadOnly).to.be.true;
   });
 
   describe('editing', () => {
     describe('the status field', () => {
       beforeEach(() => {
-        return DetailPage.changeStatus('Denied');
+        return DetailPage.form.changeStatus('Denied');
       });
 
       it('updates the status', () => {
-        expect(DetailPage.status).to.equal('Denied');
+        expect(DetailPage.form.status).to.equal('Denied');
       });
     });
 
     describe('the start date field', () => {
       beforeEach(() => {
-        return DetailPage.changeStartDate('06-07-2019');
+        return DetailPage.form.changeStartDate('7');
       });
 
       it('updates the start date', () => {
-        expect(DetailPage.startDate).to.equal('06-07-2019');
+        expect(DetailPage.form.startDate.value).to.equal('01-07-2019');
       });
     });
 
     describe('the end date field', () => {
       beforeEach(() => {
-        return DetailPage.changeEndDate('06-09-2019');
+        return DetailPage.form.changeEndDate('9');
       });
 
       it('updates the end date', () => {
-        expect(DetailPage.endDate).to.equal('06-09-2019');
+        expect(DetailPage.form.endDate.value).to.equal('01-09-2019');
       });
     });
 
     describe('then canceling edits', () => {
       beforeEach(() => {
-        return DetailPage.clickCancel();
+        return DetailPage.form.clickCancel();
       });
 
       it('navigates to the list view page', () => {
@@ -79,9 +79,9 @@ describeApp('Detail Route', () => {
         });
 
         it('original values have been restored to each field', () => {
-          expect(DetailPage.status).to.equal('Pending');
-          expect(DetailPage.startDate).to.equal('01-01-2019');
-          expect(DetailPage.endDate).to.equal('02-01-2019');
+          expect(DetailPage.form.status).to.equal('Pending');
+          expect(DetailPage.form.startDate.value).to.equal('01-01-2019');
+          expect(DetailPage.form.endDate.value).to.equal('01-31-2019');
         });
       });
     });
@@ -89,17 +89,16 @@ describeApp('Detail Route', () => {
 
   describe('saving edited fields', () => {
     let payload;
-    beforeEach(function() {
+    beforeEach(async function() {
       this.server.put('/requests/:id', ({ requests }, netReq) => { // eslint-disable-line no-unused-vars
         payload = JSON.parse(netReq.requestBody);
         return payload;
       });
 
-      return DetailPage
-        .changeStatus('Approved')
-        .changeStartDate('11-20-2019')
-        .changeEndDate('12-05-2019')
-        .clickSave();
+      await DetailPage.form.changeStatus('Approved');
+      await DetailPage.form.changeStartDate('11-20-2019');
+      await DetailPage.form.changeEndDate('12-05-2019');
+      await DetailPage.form.clickSave();
     });
 
     it('sends the correct payload in the request', () => {

@@ -11,25 +11,25 @@ describeApp('Create Detail Route', () => {
   });
 
   it('has disabled the save button when form is empty', () => {
-    expect(CreatePage.isSaveDisabled).to.be.true;
+    expect(CreatePage.form.isSaveDisabled).to.be.true;
   });
 
   describe('creating a record', () => {
     describe('with filled in values', () => {
       beforeEach(async () => {
-        await CreatePage.changeOwnerName('Amber')
-        await CreatePage.changeStartDate('12')
-        await CreatePage.changeEndDate('22');
+        await CreatePage.form.changeOwnerName('Amber')
+        await CreatePage.form.changeStartDate('12')
+        await CreatePage.form.changeEndDate('22');
       });
      
       it('updates the form values accordingly', () => {
-        expect(CreatePage.ownerName).to.equal('Amber');
-        expect(CreatePage.startDate.value).to.equal('01-12-2019');
-        expect(CreatePage.endDate.value).to.equal('01-22-2019');
+        expect(CreatePage.form.ownerName).to.equal('Amber');
+        expect(CreatePage.form.startDate.value).to.equal('01-12-2019');
+        expect(CreatePage.form.endDate.value).to.equal('01-22-2019');
       });
 
       it('enables the save button', () => {
-        expect(CreatePage.isSaveDisabled).to.be.false;
+        expect(CreatePage.form.isSaveDisabled).to.be.false;
       });
 
       describe('clicking save', () => {
@@ -40,7 +40,7 @@ describeApp('Create Detail Route', () => {
             return db.requests.create(payload);
           });
 
-          return CreatePage.clickSave();
+          return CreatePage.form.clickSave();
         });
 
         it('sends a POST request with the full payload', () => {
