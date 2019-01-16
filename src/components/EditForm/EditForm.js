@@ -32,13 +32,13 @@ export default class EditForm extends Component {
   }
 
   changeStartDate = (date) => {
+    console.log('Date: ', date)
     this.setState(prevState => ({ request: { ...prevState.request, startDate: date }}));
   }
 
   changeStatus = (event) => {
-    console.log('old state: ', this.state)
     let inputValue = event.target.value;
-    this.setState(prevState => ({ request: { ...prevState.request, status: inputValue }}), () => console.log('new state: ', this.state));
+    this.setState(prevState => ({ request: { ...prevState.request, status: inputValue }}));
   }
 
   get formHasChanged() {
@@ -82,7 +82,7 @@ export default class EditForm extends Component {
               <label className="label">Start Date</label>
               <div className="control" data-test-start-date>
                 <DayPickerInput
-                  value={request.startDate}
+                  value={formatDate(request.startDate, "MM-DD-YYYY")}
                   placeholder="Start date"
                   format="MM-DD-YYYY"
                   formatDate={formatDate}
@@ -96,7 +96,7 @@ export default class EditForm extends Component {
               <label className="label">End Date</label>
               <div className="control" data-test-end-date>
                 <DayPickerInput
-                  value={request.endDate}
+                  value={formatDate(request.endDate, "MM-DD-YYYY")}
                   placeholder="End date"
                   format="MM-DD-YYYY"
                   formatDate={formatDate}
