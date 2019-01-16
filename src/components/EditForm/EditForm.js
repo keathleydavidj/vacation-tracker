@@ -6,6 +6,8 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { formatDate, parseDate } from 'react-day-picker/moment';
 import 'react-day-picker/lib/style.css';
 
+const dateFrom = date => 
+  typeof date === 'string' ? new Date(date) : date;
 
 export default class EditForm extends Component {
   static propTypes = {
@@ -14,12 +16,21 @@ export default class EditForm extends Component {
   }
 
   state = {
-    request: this.props.initialState
+    request: {
+      ...this.props.initialState,
+      startDate: dateFrom(this.props.initialState.startDate),
+      endDate: dateFrom(this.props.initialState.endDate)
+    }
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.onSubmit(this.state.request);
+    let payload = 
+    this.props.onSubmit({
+      ...this.state.request,
+      startDate: this.state.request.startDate.toISOString(),
+      endDate: this.state.request.endDate.toISOString()
+    });
   }
 
   changeOwnerName = (event) => {
@@ -32,7 +43,6 @@ export default class EditForm extends Component {
   }
 
   changeStartDate = (date) => {
-    console.log('Date: ', date)
     this.setState(prevState => ({ request: { ...prevState.request, startDate: date }}));
   }
 
@@ -44,13 +54,8 @@ export default class EditForm extends Component {
   get formHasChanged() {
     let current = this.state.request;
     return Object
-      .keys(this.props.initialState)
-      .reduce((acc, key) => {
-        if (acc) {
-          return acc;
-        }
-        return this.props.initialState[key] !== current[key];
-      }, false);
+      .entries(this.props.initialState)
+      .reduce((acc, [key, value]) => acc ? acc : value !== current[key], false);
   }
 
 
@@ -82,7 +87,7 @@ export default class EditForm extends Component {
               <label className="label">Start Date</label>
               <div className="control" data-test-start-date>
                 <DayPickerInput
-                  value={formatDate(request.startDate, "MM-DD-YYYY")}
+                  value={request.startDate}
                   placeholder="Start date"
                   format="MM-DD-YYYY"
                   formatDate={formatDate}
@@ -96,7 +101,7 @@ export default class EditForm extends Component {
               <label className="label">End Date</label>
               <div className="control" data-test-end-date>
                 <DayPickerInput
-                  value={formatDate(request.endDate, "MM-DD-YYYY")}
+                  value={request.endDate}
                   placeholder="End date"
                   format="MM-DD-YYYY"
                   formatDate={formatDate}

@@ -14,8 +14,8 @@ class DetailRoute extends Component {
     key: 0,
     request: {
       owner: '',
-      startDate: '',
-      endDate: '',
+      startDate: undefined,
+      endDate: undefined,
       status: ''
     }
   };

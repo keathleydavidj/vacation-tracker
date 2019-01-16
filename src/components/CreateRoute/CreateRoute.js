@@ -4,8 +4,8 @@ import EditForm from '../EditForm';
 
 const initialState = {
   owner: '',
-  startDate: '',
-  endDate: '',
+  startDate: undefined,
+  endDate: undefined,
   status: 'Pending'
 };
 

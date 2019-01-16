@@ -11,8 +11,8 @@ describeApp('Detail Route', () => {
     request = this.server.create('request', {
       owner: 'David',
       status: 'Pending',
-      startDate: '01-01-2019',
-      endDate: '01-31-2019'
+      startDate: '2019-01-01T23:22:48.526Z',
+      endDate: '2019-01-31T23:22:48.526Z'
     });
     return this.visit(`/requests/${request.id}`);
   });
