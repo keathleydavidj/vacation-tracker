@@ -10,8 +10,6 @@ import {
 import DatePicker from './date-picker';
 
 @interactor class EditForm {
-  static defaultScope = 'form';
-
   ownerName = value('[data-test-owner-name]');
   status = value('[data-test-status]');
   startDate = scoped('[data-test-start-date] .DayPickerInput', DatePicker);

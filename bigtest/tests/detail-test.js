@@ -96,15 +96,15 @@ describeApp('Detail Route', () => {
       });
 
       await DetailPage.form.changeStatus('Approved');
-      await DetailPage.form.changeStartDate('11-20-2019');
-      await DetailPage.form.changeEndDate('12-05-2019');
+      await DetailPage.form.changeStartDate('3');
+      await DetailPage.form.changeEndDate('5');
       await DetailPage.form.clickSave();
     });
 
     it('sends the correct payload in the request', () => {
       expect(payload.status).to.equal('Approved');
-      expect(payload.startDate).to.equal('11-20-2019');
-      expect(payload.endDate).to.equal('12-05-2019');
+      expect(payload.startDate).to.equal('2019-01-03T18:00:00.000Z');
+      expect(payload.endDate).to.equal('2019-01-05T18:00:00.000Z');
     });
   });
 });
