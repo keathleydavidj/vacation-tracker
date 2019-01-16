@@ -33,6 +33,10 @@ describeApp('Detail Route', () => {
     expect(DetailPage.form.nameIsReadOnly).to.be.true;
   });
 
+  it('disables save button with no changes', () => {
+    expect(DetailPage.form.isSaveDisabled).to.be.true;
+  });
+
   describe('editing', () => {
     describe('the status field', () => {
       beforeEach(() => {
@@ -51,6 +55,20 @@ describeApp('Detail Route', () => {
 
       it('updates the start date', () => {
         expect(DetailPage.form.startDate.value).to.equal('01-07-2019');
+      });
+
+      it('enables the save button', () => {
+        expect(DetailPage.form.isSaveDisabled).to.be.false;
+      });
+
+      describe('then changing it back', () => {
+        beforeEach(() => {
+          return DetailPage.form.changeStartDate('1');
+        });
+
+        it('disables the save button again', () => {
+          expect(DetailPage.form.isSaveDisabled).to.be.true;
+        });
       });
     });
 

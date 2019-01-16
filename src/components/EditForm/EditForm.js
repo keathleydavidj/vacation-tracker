@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, Match } from '@reach/router';
 import PropTypes from 'prop-types';
 
+import moment from 'moment';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { formatDate, parseDate } from 'react-day-picker/moment';
 import 'react-day-picker/lib/style.css';
@@ -15,17 +16,21 @@ export default class EditForm extends Component {
     initialState: PropTypes.object.isRequired
   }
 
-  state = {
-    request: {
-      ...this.props.initialState,
-      startDate: dateFrom(this.props.initialState.startDate),
-      endDate: dateFrom(this.props.initialState.endDate)
+  constructor(props) {
+    super(props);
+    let initState = {
+      ...props.initialState,
+      startDate: dateFrom(props.initialState.startDate),
+      endDate: dateFrom(props.initialState.endDate)
+    }
+    this.state = {
+      initial: { ...initState },
+      request: { ...initState }
     }
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    let payload = 
     this.props.onSubmit({
       ...this.state.request,
       startDate: this.state.request.startDate.toISOString(),
@@ -54,10 +59,15 @@ export default class EditForm extends Component {
   get formHasChanged() {
     let current = this.state.request;
     return Object
-      .entries(this.props.initialState)
-      .reduce((acc, [key, value]) => acc ? acc : value !== current[key], false);
+      .entries(this.state.initial)
+      .reduce((acc, [key, value]) => {
+        return acc ?
+          acc :
+          value instanceof Date ?
+            !(moment(value).isSame(current[key], 'day')) :
+            value !== current[key];
+      }, false);
   }
-
 
   render() {
     let { request } = this.state;
