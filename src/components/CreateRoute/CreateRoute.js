@@ -37,6 +37,7 @@ class CreateRoute extends Component {
         <EditForm
           onSubmit={this.createRecord}
           initialState={initialState}
+          isNew={true}
         />
       </div>
     );

@@ -63,6 +63,7 @@ class DetailRoute extends Component {
           key={key}
           onSubmit={this.updateRecord}
           initialState={request}
+          isNew={false}
         />
       </div>
     );
