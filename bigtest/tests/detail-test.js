@@ -121,8 +121,8 @@ describeApp('Detail Route', () => {
 
     it('sends the correct payload in the request', () => {
       expect(payload.status).to.equal('Approved');
-      expect(payload.startDate).to.equal('2019-01-03T18:00:00.000Z');
-      expect(payload.endDate).to.equal('2019-01-05T18:00:00.000Z');
+      expect(payload.startDate).to.equal('2019-01-04T00:00:00.000Z');
+      expect(payload.endDate).to.equal('2019-01-06T00:00:00.000Z');
     });
   });
 });

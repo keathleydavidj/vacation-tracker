@@ -12,7 +12,7 @@ const initialState = {
 
 class CreateRoute extends Component {
   static propTypes = {
-    navigate: PropTypes.func.isRequired,
+    navigate: PropTypes.func,
   };
 
   createRecord = (payload) => {

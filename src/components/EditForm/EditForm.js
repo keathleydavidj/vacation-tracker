@@ -7,12 +7,16 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { formatDate, parseDate } from 'react-day-picker/moment';
 import 'react-day-picker/lib/style.css';
 
+import { addOffset, removeOffset } from '../../utils';
+
 const dateFrom = date => 
-  typeof date === 'string' ? new Date(date) : date;
+  typeof date === 'string' ?
+    addOffset(date) :
+    date;
 
 export default class EditForm extends Component {
   static propTypes = {
-    onSubmit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func,
     initialState: PropTypes.object.isRequired
   }
 
@@ -33,8 +37,8 @@ export default class EditForm extends Component {
     e.preventDefault();
     this.props.onSubmit({
       ...this.state.request,
-      startDate: this.state.request.startDate.toISOString(),
-      endDate: this.state.request.endDate.toISOString()
+      startDate: removeOffset(this.state.request.startDate).toISOString(),
+      endDate: removeOffset(this.state.request.endDate).toISOString()
     });
   }
 

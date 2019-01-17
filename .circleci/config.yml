@@ -8,6 +8,8 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/node:8-browsers
+        environment:
+          TZ: "America/Chicago"
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images

@@ -3,8 +3,8 @@ export default function defaultScenario(server) {
   server.create('request', {
     owner: 'Larry',
     status: 'Approved',
-    startDate: new Date(2019, 0, 1),
-    endDate: new Date(2019, 11, 31)
+    startDate: '2019-01-02T00:00:00.000Z',
+    endDate: '2020-01-01T00:00:00.000Z'
   });
   server.createList('request', 3);
 }
