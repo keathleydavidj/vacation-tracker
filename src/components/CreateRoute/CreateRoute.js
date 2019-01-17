@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import EditForm from '../EditForm';
 
@@ -10,6 +11,10 @@ const initialState = {
 };
 
 class CreateRoute extends Component {
+  static propTypes = {
+    navigate: PropTypes.func.isRequired,
+  };
+
   createRecord = (payload) => {
     fetch(`https://api.frontside.io/v1/requests`, {
       method: 'POST',
@@ -23,7 +28,7 @@ class CreateRoute extends Component {
       .catch(error => console.error('Error: ', error)); // eslint-disable-line no-console
   }
 
- render() {
+  render() {
     return (
       <div data-test-create-route>
         <h6>

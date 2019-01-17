@@ -22,11 +22,11 @@ export default class EditForm extends Component {
       ...props.initialState,
       startDate: dateFrom(props.initialState.startDate),
       endDate: dateFrom(props.initialState.endDate)
-    }
+    };
     this.state = {
       initial: { ...initState },
       request: { ...initState }
-    }
+    };
   }
 
   handleSubmit = (e) => {

@@ -17,8 +17,8 @@ describeApp('Create Detail Route', () => {
   describe('creating a record', () => {
     describe('with filled in values', () => {
       beforeEach(async () => {
-        await CreatePage.form.changeOwnerName('Amber')
-        await CreatePage.form.changeStartDate('12')
+        await CreatePage.form.changeOwnerName('Amber');
+        await CreatePage.form.changeStartDate('12');
         await CreatePage.form.changeEndDate('22');
       });
      

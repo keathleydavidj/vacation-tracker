@@ -23,7 +23,7 @@ import {
 
   async selectDay(day) {
     await this.focusInput()
-      .when(() => this.isDayPickerVisible)
+      .when(() => this.isDayPickerVisible);
     await this.dayCells()
       .find(cell => cell.dayText === `${day}`)
       .clickDay();

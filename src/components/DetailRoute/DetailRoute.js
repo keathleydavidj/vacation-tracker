@@ -5,7 +5,8 @@ import EditForm from '../EditForm';
 
 class DetailRoute extends Component {
   static propTypes = {
-    requestId: PropTypes.string
+    navigate: PropTypes.func.isRequired,
+    requestId: PropTypes.string.isRequired
   }; 
   
   _isMounted = false;
