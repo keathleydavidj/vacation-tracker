@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RequestsComponent } from './requests/requests.component';
 import { RequestListComponent } from './request-list/request-list.component';
 import { RequestListItemComponent } from './request-list-item/request-list-item.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { RequestListItemComponent } from './request-list-item/request-list-item.
     RequestsComponent,
     RequestListComponent,
     RequestListItemComponent,
+    NavBarComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,
