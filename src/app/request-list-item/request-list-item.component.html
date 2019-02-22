@@ -31,7 +31,10 @@
     </button>
   </div>
   <div class="level-item has-text-centered">
-    <button class="button is-danger" data-test-delete-icon>
+    <button
+      (click)="removeRequest()"
+      class="button is-danger"
+      data-test-delete-icon>
       <span class="icon">
         <i class="fas fa-trash"></i>
       </span>

@@ -74,26 +74,26 @@ describe('IndexRoute', () => {
       //   });
       // });
 
-      // describe('clicking delete icon', () => {
-      //   let called = false;
+      describe('clicking delete icon', () => {
+        let called = false;
 
-      //   beforeEach(function() {
-      //     this.server.delete('/requests/:id', () => {
-      //       called = true;
-      //       return {};
-      //     });
+        beforeEach(function() {
+          this.server.delete('/requests/:id', () => {
+            called = true;
+            return {};
+          });
 
-      //     return app.requestList(0).clickDelete();
-      //   });
+          return app.requestList(0).clickDelete();
+        });
 
-      //   xit('removes that record from the list', () => {
-      //     expect(app.requestList(0).ownerName).toNotBe('Larry');
-      //   });
+        it('removes that record from the list', when(() => {
+          expect(app.requestList(0).ownerName).not.toBe('Larry');
+        }));
 
-      //   xit('sends off the api request successfully', () => {
-      //     expect(called).toBe(true);
-      //   });
-      // });
+        it('sends off the api request successfully', when(() => {
+          expect(called).toBe(true);
+        }));
+      });
     });
   });
 });

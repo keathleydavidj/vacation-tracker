@@ -3,7 +3,9 @@
     Requests
   </h6>
   <br />
-  <app-request-list [requests]="requests"></app-request-list>
+  <app-request-list
+    [deleteRequest]="deleteRequest"
+    [requests]="requests"></app-request-list>
   <button class="button is-dark" data-test-create-button>
     Create new request
   </button>

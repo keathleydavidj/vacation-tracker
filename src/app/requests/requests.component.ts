@@ -14,4 +14,10 @@ export class RequestsComponent implements OnInit {
   ngOnInit() {
     this.requestsService.getRequests().subscribe(data => this.requests = data);
   }
+
+  deleteRequest = id => {
+    const newList = this.requests.filter(req => req.id !== id);
+    this.requestsService.deleteRequest(id).subscribe();
+    this.requests = newList;
+  }
 }

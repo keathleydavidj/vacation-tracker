@@ -8,6 +8,7 @@ import { Request } from '../requests.service';
 })
 export class RequestListComponent implements OnInit {
   @Input() requests: Request[];
+  @Input() deleteRequest: (id: number) => void;
 
   constructor() { }
 
